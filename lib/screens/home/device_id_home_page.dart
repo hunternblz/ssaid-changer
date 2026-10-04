@@ -198,9 +198,9 @@ class _DeviceIdHomePageState extends State<DeviceIdHomePage> {
     }
 
     final newId = _newIdController.text.trim();
-    if (!RegExp(r'^[0-9a-fA-F]{16}$').hasMatch(newId)) {
+    if (!RegExp(r'^[0-9a-fA-F]+$').hasMatch(newId)) {
       setState(() {
-        _statusMessage = 'Device ID must be 16 hex characters (0-9, a-f).';
+        _statusMessage = 'Device ID must contain hex characters (0-9, a-f).';
       });
       return;
     }
@@ -1055,13 +1055,11 @@ class _DeviceIdHomePageState extends State<DeviceIdHomePage> {
               children: [
                 TextField(
                   controller: _newIdController,
-                  maxLength: 16,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9a-fA-F]')),
                   ],
                   decoration: InputDecoration(
-                    labelText: 'New SSAID (16 hex chars)',
-                    counterText: '',
+                    labelText: 'New SSAID (hex chars)',
                     filled: true,
                     fillColor: AppColors.surfaceAlt,
                   ),
